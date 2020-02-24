@@ -1,7 +1,7 @@
 # WeatherApp
 # Android project made using Kotlin
 
-Follow these steps to use this project :- 
+Follow these steps before using this project :- 
 
 1> Get your personal API key from https://weatherstack.com/
 
