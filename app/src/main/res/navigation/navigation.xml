@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@+id/welcomeFragmant">
+
+    <fragment
+        android:id="@+id/welcomeFragmant"
+        android:name="com.example.weatherapp.Fragmants.WelcomeFragmant"
+        android:label="fragment_welcome_fragmant"
+        tools:layout="@layout/fragment_welcome_fragmant">
+        <action
+            android:id="@+id/action_welcomeFragmant_to_navigation2"
+            app:destination="@id/navigation2"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <navigation
+        android:id="@+id/navigation2"
+        app:startDestination="@id/mainFragmant2">
+        <fragment
+            android:id="@+id/mainFragmant2"
+            android:name="com.example.weatherapp.Fragmants.MainFragmant"
+            android:label="fragment_main_fragmant"
+            tools:layout="@layout/fragment_main_fragmant" />
+        <action
+            android:id="@+id/action_navigation2_self"
+            app:destination="@id/navigation2"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_global_settingsFragmant"
+            app:destination="@id/settingsFragmant"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </navigation>
+    <fragment
+        android:id="@+id/settingsFragmant"
+        android:name="com.example.weatherapp.Fragmants.SettingsFragmant"
+        android:label="fragment_settings_fragmant"
+        tools:layout="@layout/fragment_settings_fragmant" />
+</navigation>
