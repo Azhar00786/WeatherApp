@@ -2,7 +2,7 @@
 ...Android project made using Kotlin...
 
 The project displays weather details of a particular location, the location is accepted into the project by two methods(manually i.e. by typing/GPS or using network service).
-Retrofit lib is used to access the data from the API and Moshi lib is used to convert the JSON data from the API to Data objects.
+Retrofit lib is used to access the data from the API, Moshi lib is used to convert the JSON data from the API to Data objects and Room lib is used to cache the location name for the project.
 
 Follow these steps before using this project :- 
 
