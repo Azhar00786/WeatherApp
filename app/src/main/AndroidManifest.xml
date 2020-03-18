@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".NavigationDrawerActivity"></activity>
         <activity android:name=".Entity.NavigationDawerActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="nosensor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
