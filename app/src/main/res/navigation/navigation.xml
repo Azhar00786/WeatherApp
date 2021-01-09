@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcomeFragmant"
-        android:name="com.example.weatherapp.Fragmants.WelcomeFragmant"
+        android:name="com.example.weatherapp.fragments.WelcomeFragmant"
         android:label="fragment_welcome_fragmant"
         tools:layout="@layout/fragment_welcome_fragmant">
         <action
@@ -23,7 +23,7 @@
         app:startDestination="@id/mainFragmant2">
         <fragment
             android:id="@+id/mainFragmant2"
-            android:name="com.example.weatherapp.Fragmants.MainFragmant"
+            android:name="com.example.weatherapp.fragments.MainFragmant"
             android:label="fragment_main_fragmant"
             tools:layout="@layout/fragment_main_fragmant" />
         <action
@@ -43,7 +43,7 @@
     </navigation>
     <fragment
         android:id="@+id/settingsFragmant"
-        android:name="com.example.weatherapp.Fragmants.SettingsFragmant"
+        android:name="com.example.weatherapp.fragments.SettingsFragmant"
         android:label="fragment_settings_fragmant"
         tools:layout="@layout/fragment_settings_fragmant" />
 </navigation>

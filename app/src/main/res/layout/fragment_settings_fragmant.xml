@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragmants.SettingsFragmant">
+    tools:context=".fragments.SettingsFragmant">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id = "@+id/setCityButton"
+                android:id="@+id/setCityButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="160dp"

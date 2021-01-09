@@ -3,14 +3,14 @@ Coder : AZhar
  **/
 
 
-package com.example.weatherapp.ViewModel
+package com.example.weatherapp.viewmodels
 
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.weatherapp.Database.Dao.UserDao
-import com.example.weatherapp.Database.Entity.CityNameHolder
+import com.example.weatherapp.database.dao.UserDao
+import com.example.weatherapp.database.database_entity.CityNameHolder
 import kotlinx.coroutines.runBlocking
 
 class SettingsFragmantViewModel(val daoConnector: UserDao) : ViewModel() {
@@ -24,7 +24,8 @@ class SettingsFragmantViewModel(val daoConnector: UserDao) : ViewModel() {
     }
 }
 
-class SettingsFragmantViewModelFactory(private val daoConnector : UserDao) : ViewModelProvider.NewInstanceFactory(){
+class SettingsFragmantViewModelFactory(private val daoConnector: UserDao) :
+    ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return SettingsFragmantViewModel(daoConnector) as T
     }

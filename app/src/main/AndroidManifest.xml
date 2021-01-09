@@ -14,8 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NavigationDrawerActivity"></activity>
-        <activity android:name=".Entity.NavigationDawerActivity" />
         <activity android:name=".MainActivity"
             android:screenOrientation="nosensor" >
             <intent-filter>

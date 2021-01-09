@@ -1,4 +1,4 @@
-package com.example.weatherapp.Fragmants
+package com.example.weatherapp.fragments
 
 
 import android.os.Bundle
@@ -32,7 +32,11 @@ class WelcomeFragmant : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Main).launch {
             delay(2000)
-            findNavController().navigate(R.id.action_welcomeFragmant_to_navigation2,null,NavOptions.Builder().setPopUpTo(R.id.welcomeFragmant,true).build())
+            findNavController().navigate(
+                R.id.action_welcomeFragmant_to_navigation2,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.welcomeFragmant, true).build()
+            )
         }
     }
 }

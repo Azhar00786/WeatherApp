@@ -1,4 +1,4 @@
-package com.example.weatherapp.Fragmants
+package com.example.weatherapp.fragments
 
 
 import android.app.AlertDialog
@@ -16,20 +16,20 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.weatherapp.Database.AppDatabase
+import com.example.weatherapp.database.AppDatabase
 
 import com.example.weatherapp.R
-import com.example.weatherapp.ViewModel.MainFragmantViewModel
-import com.example.weatherapp.ViewModel.MainFragmantViewModelFactory
+import com.example.weatherapp.viewmodels.MainFragmantViewModel
+import com.example.weatherapp.viewmodels.MainFragmantViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main_fragmant.*
 
 /**
-    Coder : AZhar
+Coder : AZhar
  */
 class MainFragmant : Fragment() {
 
-    private lateinit var viewModel : MainFragmantViewModel
-    private lateinit var viewModelFactory :MainFragmantViewModelFactory
+    private lateinit var viewModel: MainFragmantViewModel
+    private lateinit var viewModelFactory: MainFragmantViewModelFactory
 
 
     override fun onCreateView(
@@ -39,12 +39,15 @@ class MainFragmant : Fragment() {
 
         val connMgr = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connMgr.activeNetworkInfo
-        if(activeNetwork != null){
-            if(activeNetwork.isConnected){
+        if (activeNetwork != null) {
+            if (activeNetwork.isConnected) {
 
                 //viewmodel and viewmodelfactory is initialized
-                viewModelFactory = MainFragmantViewModelFactory(AppDatabase.getInstance(requireContext()).userDao())
-                viewModel = ViewModelProviders.of(this,viewModelFactory).get(MainFragmantViewModel::class.java)
+                viewModelFactory = MainFragmantViewModelFactory(
+                    AppDatabase.getInstance(requireContext()).userDao()
+                )
+                viewModel = ViewModelProviders.of(this, viewModelFactory)
+                    .get(MainFragmantViewModel::class.java)
 
                 // Inflate the layout for this fragment
                 return inflater.inflate(R.layout.fragment_main_fragmant, container, false)
@@ -113,32 +116,36 @@ class MainFragmant : Fragment() {
 
         viewModel.imageUrl.observe(viewLifecycleOwner, Observer {
             Glide.with(temperatureImage.context)
-                    .load(it)
-                    .apply(RequestOptions()
-                    .error(R.drawable.ic_broken_image_black_24dp))
-                    .into(temperatureImage)
+                .load(it)
+                .apply(
+                    RequestOptions()
+                        .error(R.drawable.ic_broken_image_black_24dp)
+                )
+                .into(temperatureImage)
         })
 
-        settingsButton.setOnClickListener{
+        settingsButton.setOnClickListener {
             settingsFragmantCaller()
         }
     }
 
-    private fun settingsFragmantCaller(){
+    private fun settingsFragmantCaller() {
         findNavController().navigate(R.id.action_global_settingsFragmant)
     }
 
-    private fun alertBoxCaller(){
+    private fun alertBoxCaller() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("No Internet Connection")
         builder.setMessage("Check Internet connectivity")
         builder.setIcon(R.drawable.ic_error_outline_black_24dp)
 
-        builder.setPositiveButton("RETRY"){dialogInterface, which: Int ->
-            findNavController().navigate(R.id.action_navigation2_self,null,
-                NavOptions.Builder().setPopUpTo(R.id.navigation2,true).build())
+        builder.setPositiveButton("RETRY") { dialogInterface, which: Int ->
+            findNavController().navigate(
+                R.id.action_navigation2_self, null,
+                NavOptions.Builder().setPopUpTo(R.id.navigation2, true).build()
+            )
         }
-        builder.setNeutralButton("EXIT"){dialog: DialogInterface?, which: Int ->
+        builder.setNeutralButton("EXIT") { dialog: DialogInterface?, which: Int ->
             System.exit(-1)
         }
 
