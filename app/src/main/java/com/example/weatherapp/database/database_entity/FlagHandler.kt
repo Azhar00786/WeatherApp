@@ -1,8 +1,3 @@
-/**
-Coder : AZhar
- **/
-
-
 package com.example.weatherapp.database.database_entity
 
 import androidx.room.Entity

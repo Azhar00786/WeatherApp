@@ -1,7 +1,6 @@
 package com.example.weatherapp.fragments
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -19,20 +18,17 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.*
 import com.example.weatherapp.database.AppDatabase
 import com.example.weatherapp.R
 import com.example.weatherapp.viewmodels.SettingsFragmantViewModel
 import com.example.weatherapp.viewmodels.SettingsFragmantViewModelFactory
 import com.google.android.gms.location.*
+import kotlinx.coroutines.*
 import java.util.*
 
-
-/**
-Coder : AZhar
- **/
 class SettingsFragmant : PreferenceFragmentCompat() {
-    private val PERMISSION_ID = 42
 
     private lateinit var viewModelFact: SettingsFragmantViewModelFactory
     private lateinit var viewMod: SettingsFragmantViewModel
@@ -62,14 +58,16 @@ class SettingsFragmant : PreferenceFragmentCompat() {
 
 
         bindSwitchPreference(prefOne)
-        booleanValue.observe(viewLifecycleOwner, Observer {
+        booleanValue.observe(viewLifecycleOwner, Observer { it ->
             if (it == "true") {
                 getLocationUpdates()
             } else {
                 pref = findPreference("CUSTOM_LOCATION")
                 bindPreferenceSummaryToValue(pref)
                 stringValue.observe(viewLifecycleOwner, Observer {
-                    viewMod.setDataInDb(it)
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        viewMod.setDataInDb(it)
+                    }
                 })
             }
         })
@@ -112,15 +110,18 @@ class SettingsFragmant : PreferenceFragmentCompat() {
             1
         )
         if (addresses != null && addresses.isNotEmpty()) {
-            val address: String = addresses[0].getAddressLine(0)
-            val city: String = addresses[0].locality
-            val state: String = addresses[0].adminArea
-            val country: String = addresses[0].countryName
-            val postalCode: String = addresses[0].postalCode
-            val knownName: String = addresses[0].featureName
-            Log.d("location###", "$address $city $state $postalCode $country $knownName")
-            Toast.makeText(requireContext(), "Location set to : $city", Toast.LENGTH_SHORT).show()
-            viewMod.setDataInDb(city)
+            viewLifecycleOwner.lifecycleScope.launch {
+                val address: String = addresses[0].getAddressLine(0)
+                val city: String = addresses[0].locality
+                val state: String = addresses[0].adminArea
+                val country: String = addresses[0].countryName
+                val postalCode: String = addresses[0].postalCode
+                val knownName: String = addresses[0].featureName
+                Log.d("G-location###", "$address $city $state $postalCode $country $knownName")
+                Toast.makeText(requireContext(), "Location set to : $city", Toast.LENGTH_SHORT)
+                    .show()
+                viewMod.setDataInDb(city)
+            }
         }
     }
 
@@ -164,7 +165,7 @@ class SettingsFragmant : PreferenceFragmentCompat() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.d("ERROR","Permission not granted by user")
+            Log.d("ERROR", "Permission not granted by user")
             return
         }
         fusedLocationClient.requestLocationUpdates(
@@ -189,7 +190,7 @@ class SettingsFragmant : PreferenceFragmentCompat() {
                 android.Manifest.permission.ACCESS_COARSE_LOCATION,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ),
-            PERMISSION_ID
+            Companion.PERMISSION_ID
         )
     }
 
@@ -198,7 +199,7 @@ class SettingsFragmant : PreferenceFragmentCompat() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        if (requestCode == PERMISSION_ID) {
+        if (requestCode == Companion.PERMISSION_ID) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 getLocationUpdates()
             }
@@ -254,5 +255,7 @@ class SettingsFragmant : PreferenceFragmentCompat() {
                 }
                 true
             }
+
+        private const val PERMISSION_ID = 42
     }
 }

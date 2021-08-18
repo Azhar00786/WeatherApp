@@ -10,16 +10,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.database.dao.UserDao
-import com.example.weatherapp.database.database_entity.CityNameHolder
-import kotlinx.coroutines.runBlocking
+import com.example.weatherapp.repository.Repository
 
-class SettingsFragmantViewModel(val daoConnector: UserDao) : ViewModel() {
-    private val cityNo = 1
+class SettingsFragmantViewModel(private val daoConnector: UserDao) : ViewModel() {
+    private var repo: Repository = Repository(daoConnector)
+
     var flagT = MutableLiveData<Int>()
 
-    fun setDataInDb(location: String) = runBlocking {
-        daoConnector.deleteCityName()
-        daoConnector.insertCityName(CityNameHolder(cityNo, location))
+    suspend fun setDataInDb(location: String) {
+        repo.insertCityNameInDb(location)
         flagT.value = 0
     }
 }

@@ -3,9 +3,6 @@ package com.example.weatherapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-/**
-Coder : AZhar
- **/
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

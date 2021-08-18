@@ -1,8 +1,3 @@
-/**
-Coder : AZhar
- **/
-
-
 package com.example.weatherapp.database.dao
 
 import androidx.room.Dao
@@ -44,5 +39,4 @@ interface UserDao {
 
     @Query("select distinct flag from FlagHandler where flag = 0")
     suspend fun selectFlagValueZero(): Int
-
 }

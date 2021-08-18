@@ -1,7 +1,3 @@
-/**
-Coder : AZhar
- **/
-
 package com.example.weatherapp.network
 
 import com.example.weatherapp.entity.ErrorMessageRoot
@@ -29,11 +25,11 @@ private val moshiObj = Moshi.Builder()
 
 interface WeatherApiServices {
     @GET("current")
-    fun getWeatherMap(@Query("query") city: String)
+    fun getWeatherMapAsync(@Query("query") city: String)
             : Deferred<WeatherRoot>
 
     @GET("current")
-    fun getErrorMessage(@Query("query") city: String)
+    fun getErrorMessageAsync(@Query("query") city: String)
             : Deferred<ErrorMessageRoot>
 }
 

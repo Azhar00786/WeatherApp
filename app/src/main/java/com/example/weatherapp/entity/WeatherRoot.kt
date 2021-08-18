@@ -1,8 +1,3 @@
-/**
-Coder : AZhar
- **/
-
-
 package com.example.weatherapp.entity
 
 import com.squareup.moshi.Json
