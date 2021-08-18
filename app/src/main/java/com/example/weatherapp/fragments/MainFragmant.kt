@@ -42,7 +42,7 @@ class MainFragmant : Fragment() {
 
         if (checkConnection()?.isConnected == true) {
 
-            //viewmodel and viewmodelfactory is initialized
+            //viewModel and viewModelFactory is initialized
             viewModelFactory = MainFragmantViewModelFactory(
                 AppDatabase.getInstance(requireContext()).userDao()
             )

@@ -50,7 +50,7 @@ class SettingsFragmant : PreferenceFragmentCompat() {
         prefOne = findPreference("USE_DEVICE_LOCATION")
 
 
-        //viewmodel and viewmodelfactory initilization
+        //viewModel and viewModelFactory Initilization
         viewModelFact =
             SettingsFragmantViewModelFactory(AppDatabase.getInstance(requireContext()).userDao())
         viewMod =
